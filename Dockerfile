@@ -25,7 +25,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
     RUN apt-get update \
-    	&& apt-get install -t unstable -y --no-install-recommends \
+    	&& apt-get install -y --no-install-recommends \
     		littler \
             r-cran-littler \
             && echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl")' >> /etc/R/Rprofile.site \
