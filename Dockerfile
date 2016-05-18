@@ -18,9 +18,10 @@ USER root
 
 # R pre-requisites
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y -t unstable --no-install-recommends \
     fonts-dejavu \
     gfortran \
+    littler \
     r-cran-littler \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
