@@ -18,13 +18,25 @@ USER root
 
 # R pre-requisites
 RUN apt-get update && \
-    apt-get install -y -t unstable --no-install-recommends \
+    apt-get install -y  --no-install-recommends \
     fonts-dejavu \
     gfortran \
-    littler \
-    r-cran-littler \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+    RUN apt-get update \
+    	&& apt-get install -t unstable -y --no-install-recommends \
+    		littler \
+            r-cran-littler \
+            && echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl")' >> /etc/R/Rprofile.site \
+            && echo 'source("/etc/R/Rprofile.site")' >> /etc/littler.r \
+    	&& ln -s /usr/share/doc/littler/examples/install.r /usr/local/bin/install.r \
+    	&& ln -s /usr/share/doc/littler/examples/install2.r /usr/local/bin/install2.r \
+    	&& ln -s /usr/share/doc/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
+    	&& ln -s /usr/share/doc/littler/examples/testInstalled.r /usr/local/bin/testInstalled.r \
+    	&& install.r docopt \
+    	&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
+    	&& rm -rf /var/lib/apt/lists/*
 
 # Julia dependencies
 RUN apt-get update && \
