@@ -2,9 +2,17 @@
 # Distributed under the terms of the Modified BSD License.
 FROM jupyter/scipy-notebook
 FROM java:openjdk-8-jre
-
+FROM jupyter/minimal-notebook
 
 MAINTAINER Jupyter Project <jupyter@googlegroups.com>
+
+
+
+
+
+
+
+
 
 USER root
 
