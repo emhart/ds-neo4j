@@ -23,6 +23,7 @@ RUN apt-get update && \
     libnettle4 && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+USER jovyan
 
 # R packages including IRKernel which gets installed globally.
 RUN conda config --add channels r && \
@@ -61,7 +62,7 @@ RUN julia -e 'Pkg.add("IJulia")' && \
 RUN echo 'push!(Sys.DL_LOAD_PATH, "/opt/conda/lib")' > /home/$NB_USER/.juliarc.jl && \
     julia -e 'Pkg.add("Gadfly")' && julia -e 'Pkg.add("RDatasets")' && julia -F -e 'Pkg.add("HDF5")'
 
-
+USER root
 
     ENV NEO4J_VERSION 3.0.0
     ENV NEO4J_EDITION community
