@@ -6,14 +6,6 @@ FROM jupyter/minimal-notebook
 
 MAINTAINER Jupyter Project <jupyter@googlegroups.com>
 
-
-
-
-
-
-
-
-
 USER root
 
 # R pre-requisites
@@ -34,6 +26,8 @@ RUN apt-get update && \
 USER jovyan
 
 # R packages including IRKernel which gets installed globally.
+RUN conda install --quiet --yes -c mutirri py2neo=2.0.8
+
 RUN conda config --add channels r && \
     conda install --quiet --yes \
     'rpy2=2.7*' \
@@ -53,8 +47,8 @@ RUN conda config --add channels r && \
     'r-nycflights13=0.1*' \
     'r-caret=6.0*' \
     'r-rcurl=1.95*' \
-    'py2neo' \
     'r-randomforest=4.6*' && conda clean -tipsy
+
 
 # Install IJulia packages as jovyan and then move the kernelspec out
 # to the system share location. Avoids problems with runtime UID change not
