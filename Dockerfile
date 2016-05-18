@@ -21,6 +21,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     fonts-dejavu \
     gfortran \
+    r-cran-littler \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -53,9 +54,16 @@ RUN conda config --add channels r && \
     'r-nycflights13=0.1*' \
     'r-caret=6.0*' \
     'r-rcurl=1.95*' \
-    'r-RNeo4j=1.*' \
-    'Py2neo' \
+    'py2neo' \
     'r-randomforest=4.6*' && conda clean -tipsy
+
+### Install additional R packages
+RUN install2.r --error \
+    -r "https://cran.rstudio.com" \
+    MASS \
+    RNeo4j \
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
 
 # Install IJulia packages as jovyan and then move the kernelspec out
 # to the system share location. Avoids problems with runtime UID change not
