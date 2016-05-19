@@ -14,6 +14,9 @@ RUN apt-get update && \
     fonts-dejavu \
     gfortran \
     wget \
+    openssl \
+    libcurl4-openssl-dev \
+    git \
     curl \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
