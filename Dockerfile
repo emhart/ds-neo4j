@@ -14,6 +14,7 @@ RUN apt-get update && \
     fonts-dejavu \
     gfortran \
     wget \
+    libssl-dev \
     libcurl4-openssl-dev \
     git \
     curl \
