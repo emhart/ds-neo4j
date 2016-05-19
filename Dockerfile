@@ -13,7 +13,8 @@ RUN apt-get update && \
     apt-get install -y  --no-install-recommends \
     fonts-dejavu \
     gfortran \
-    libcurl \
+    wget \
+    curl \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
